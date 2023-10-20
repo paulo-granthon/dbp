@@ -1,16 +1,16 @@
 version: "3.4"
 services:
-  dbp_postgres_db:
-    container_name: dbp_postgres_db
+  dbp:
+    container_name: dbp
     image: ${DB_TARGET_IMAGE}
     restart: always
     environment:
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_USER=system
+      - DB_PASSWORD=system
     ports:
       - 15432:5432
     volumes:
-      - db:/var/lib/${DB_VOLUME}:data
+      - db:/var/lib/${DB_TARGET_VOLUME}:data
 volumes:
   db:
     driver: local

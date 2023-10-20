@@ -1,22 +1,12 @@
-IMAGE_NAME_POSTGRES=postgres:14.1-alpine
-VOLUME_NAME_POSTGRES=postgresql
-
-IMAGE_NAME_ORACLE=gvenz/oracle-xe:21-slim-faststart
-VOLUME_NAME_ORACLE=postgresql
-
-DB_TARGET_IMAGE=$(IMAGE_NAME_POSTGRES)
-DB_TARGET_VOLUME=$(VOLUME_NAME_POSTGRES)
-
-
 pg:
-	DB_TARGET_IMAGE=$(IMAGE_NAME_POSTGRES)
-	DB_TARGET_VOLUME=$(VOLUME_NAME_POSTGRES)
-	sudo docker-compose up --build -d
+	DB_TARGET_IMAGE=postgres:14.1-alpine \
+	DB_TARGET_VOLUME=postgresql \
+	docker-compose up --build -d
 
 xe:
-	DB_TARGET_IMAGE=$(IMAGE_NAME_ORACLE)
-	DB_TARGET_VOLUME=$(VOLUME_NAME_ORACLE)
-	sudo docker-compose up --build -d
+	DB_TARGET_IMAGE=gvenz/oracle-xe:21-slim-faststart \
+	DB_TARGET_VOLUME=oraclexe \
+	docker-compose up --build -d
 
 go:
 	./pgconnect.sh
