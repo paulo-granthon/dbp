@@ -1,12 +1,12 @@
 version: "3.4"
 services:
-  dbp:
-    container_name: dbp
+  dbp_container_db:
+    container_name: dbp_container_db
     image: ${DB_TARGET_IMAGE}
     restart: always
     environment:
-      - DB_USER=system
-      - DB_PASSWORD=system
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     ports:
       - 15432:5432
     volumes:
