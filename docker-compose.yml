@@ -3,15 +3,15 @@ version: "3.4"
 services:
   dbp:
     container_name: dbp
-    image: ${DB_TARGET_IMAGE}
+    image: postgres:16.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=${DATABASE_USERNAME}
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
     ports:
       - 15432:5432
     volumes:
-      - db:/var/lib/${DB_TARGET_VOLUME}:data
+      - db:/var/lib/postgresql:data
 volumes:
   db:
     driver: local
