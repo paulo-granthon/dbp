@@ -1,7 +1,8 @@
+---
 version: "3.4"
 services:
-  dbp_container_db:
-    container_name: dbp_container_db
+  dbp:
+    container_name: dbp
     image: ${DB_TARGET_IMAGE}
     restart: always
     environment:
