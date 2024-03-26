@@ -1,4 +1,4 @@
-CONTAINER_NAME=dbp_container_db
+CONTAINER_NAME=dbp
 
 pg:
 	. ./.env
