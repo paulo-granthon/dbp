@@ -7,6 +7,10 @@ services:
       - ORACLE_SID=ORCLCDB
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=Oracle_123
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
     ports:
       - 1521:1521
     volumes:
