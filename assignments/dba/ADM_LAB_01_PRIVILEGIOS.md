@@ -67,7 +67,18 @@ E então executei novamente o comando `CREATE USER` para criar o usuário `USR_L
 GRANT CONNECT, RESOURCE to USR_LAB01;
 ```
 
+-- As roles `CONNECT` e `RESOURCE` são roles pré-definidas no Oracle Database que concedem privilégios específicos para os usuários.
+
+- A role `CONNECT` concede ao usuário o privilégio de se conectar ao banco de dados.
+- A role `RESOURCE` concede ao usuário o privilégio de criar objetos no banco de dados, como tabelas, índices, sequências, entre outros.
+
+![img5](/assignments/dba/img/5_grant_connect_resource.png)
+
 ### Abra outra janela e conecte com o usuário criado acima. Foi possível conectar?
+
+-- Sim, foi possível conectar com o usuário `USR_LAB01` criado anteriormente ao utilizar a senha `SENHA`.
+
+![img6](/assignments/dba/img/6_connect_usr_lab01.png)
 
 ### Execute o comando abaixo na janela conectado como SYSTEM
 
@@ -81,9 +92,24 @@ ALTER USER USR_LAB01 IDENTIFIED BY new_password;
 select table_name from all_tables;
 ```
 
+-- O comando `ALTER USER` foi executado com sucesso, alterando a senha do usuário `USR_LAB01` para `new_password`.  
+-- Em seguida, executei o comando `select table_name from all_tables;` para verificar se o usuário `USR_LAB01` ainda estava conectado.  
+-- O comando retornou a tabela `ALL_TABLES` com as informações das tabelas existentes no banco de dados.  
+-- Constatando que o usuário `USR_LAB01` continuou conectado após a alteração da senha.  
+
+![img7](/assignments/dba/img/7_alter_user.png)
+
 ### Encerre a conexão dessa janela e tente conectar novamente usando a mesma senha. Você conseguiu conectar?
 
+-- Não foi possível conectar novamente com o usuário `USR_LAB01` utilizando a senha anterior `SENHA`, pois a senha foi alterada para `new_password`.
+
+![img8](/assignments/dba/img/8_connect_usr_lab01_fail.png)
+
 ### Tente usar a nova senha alterada no comando ALTER USER. O que aconteceu?
+
+-- Após tentar conectar com a nova senha `new_password`, foi possível acessar o usuário `USR_LAB01` com sucesso.
+
+![img9](/assignments/dba/img/9_connect_usr_lab01_new_password.png)
 
 ### A partir da janela do usuário system execute os comandos abaixo
 
@@ -91,12 +117,15 @@ select table_name from all_tables;
 SHOW USER;
 ```
 
+-- O comando `SHOW USER` exibe o nome do usuário conectado no momento, que no caso é o usuário `SYS`.
+
 ### Esse comando cria a tabela xyz em qual usuário?
 
 ```sql
 CREATE TABLE xyz (name VARCHAR2(30));
 ```
 
+-- O comando `CREATE TABLE xyz (name VARCHAR2(30));` cria a tabela `xyz` no usuário conectado, que no caso é o usuário `SYS`.
 
 ### E esse? Cria a tabela xyz em qual usuário?
 
@@ -104,7 +133,11 @@ CREATE TABLE xyz (name VARCHAR2(30));
 CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));
 ```
 
+-- O comando `CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));` cria a tabela `xyz` no usuário `USR_LAB01`.
+
 ### Que nível de privilégio foi necessário para que isso seja possível?
+
+-- Para que o usuário `SYS` possa criar uma tabela no usuário `USR_LAB01`, é necessário que o usuário `SYS` possua o privilégio `CREATE ANY TABLE`.
 
 ### Volte na janela do usuário USR_LAB01 e rode o comando abaixo
 
@@ -116,9 +149,13 @@ DESC xyz
 
 ### Esse comando funcionou? O que falta ao usuário USR_LAB01 para que esse comando funcione?
 
+-- O comando `DESC xyz` exibe o seguinte erro: `ORA-04043: object xyz does not exist`.
+
 ```sql
 DESC system.xyz
 ```
+
+-- O comando `DESC system.xyz` exibe o seguinte erro: `ORA-04043: object system.xyz does not exist`.
 
 ## Volte na janela do usuário SYSTEM
 
@@ -134,11 +171,15 @@ GRANT INSERT, DELETE, SELECT ON USR_LAB01.XYZ TO USR_LAB02;
 GRANT connect to USR_lab02;
 ```
 
+-- O comando `CREATE USER` cria um novo usuário no banco de dados Oracle. O comando acima cria o usuário `USR_LAB02` com a senha `SENHA`, definindo o `tablespace` padrão como `users`.
+
 ### Qual o significado do resultado dessa consulta?
 
 ```sql
 select * from dba_tab_privs where grantee = 'USR_LAB02';
 ```
+
+-- O comando `select * from dba_tab_privs where grantee = 'USR_LAB02';` exibe as permissões concedidas ao usuário `USR_LAB02` sobre as tabelas do banco de dados.
 
 ## Abra uma nova janela e conecte com o usuário usr_lab02. Execute o comando abaixo
 
