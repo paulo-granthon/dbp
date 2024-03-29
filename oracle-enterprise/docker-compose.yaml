@@ -4,6 +4,8 @@ services:
   oracle-db:
     image: container-registry.oracle.com/database/enterprise:latest
     environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_HOME=/opt/oracle/product/21c/dbhome_1
       - ORACLE_SID=ORCLCDB
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=Oracle_123
