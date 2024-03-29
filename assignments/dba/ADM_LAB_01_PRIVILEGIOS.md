@@ -46,7 +46,7 @@ Execute o comando abaixo na janela conectado como SYSTEM
 ALTER USER USR_LAB01 IDENTIFIED BY new_password;
 ```
 
-## Volte na janela do usuário criado e verifique se ele continua conectado através do comando abaixo:
+## Volte na janela do usuário criado e verifique se ele continua conectado através do comando abaixo
 
 ```sql
 select table_name from all_tables;
