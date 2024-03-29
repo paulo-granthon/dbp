@@ -18,6 +18,10 @@ Para este laboratório, o objetivo é proporcionar ao aluno o entendimento dos c
 sqplus sys as sysdba
 ```
 
+-- Conexão com o usuário SYSTEM efetuada no banco `oracle-enterprise` versão 21c rodando em um container Docker via docker-compose.
+
+![img1](/assignments/dba/img/1_connect_sysdba.png)
+
 Explique a finalidade da visão v$version.
 
 ```sql
