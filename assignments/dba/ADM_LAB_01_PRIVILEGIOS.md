@@ -12,7 +12,7 @@ Visões do dicionário serão utilizadas para tal
 
 Para este laboratório, o objetivo é proporcionar ao aluno o entendimento dos comandos apresentados abaixo. Por isso os comandos devem ser pesquisados na documentação do oracle e explicados no relatório.
 
-## conecte com o usuario SYSTEM
+### conecte com o usuario SYSTEM
 
 ```sql
 sqplus sys as sysdba
@@ -22,13 +22,13 @@ sqplus sys as sysdba
 
 ![img1](/assignments/dba/img/1_connect_sysdba.png)
 
-Explique a finalidade da visão v$version.
+### Explique a finalidade da visão v$version
 
 ```sql
 SELECT * FROM v$version;
 ```
 
-Explique a finalidade da visão dba_users.
+### Explique a finalidade da visão dba_users
 
 ```sql
 SELECT username FROM dba_users;
@@ -36,15 +36,15 @@ SELECT username FROM dba_users;
 CREATE USER USR_LAB01 IDENTIFIED BY SENHA default tablespace users quota unlimited on users; 
 ```
 
-Explique pela documentação da oracle a finalidade das roles connect e resource
+### Explique pela documentação da oracle a finalidade das roles connect e resource
 
 ```sql
 GRANT CONNECT, RESOURCE to USR_LAB01;
 ```
 
-Abra outra janela e conecte com o usuário criado acima. Foi possível conectar?
+### Abra outra janela e conecte com o usuário criado acima. Foi possível conectar?
 
-Execute o comando abaixo na janela conectado como SYSTEM
+### Execute o comando abaixo na janela conectado como SYSTEM
 
 ```sql
 ALTER USER USR_LAB01 IDENTIFIED BY new_password;
@@ -56,49 +56,51 @@ ALTER USER USR_LAB01 IDENTIFIED BY new_password;
 select table_name from all_tables;
 ```
 
-- Encerre a conexão dessa janela e tente conectar novamente usando a mesma senha. Você conseguiu conectar?
-- Tente usar a nova senha alterada no comando ALTER USER. O que aconteceu?
+### Encerre a conexão dessa janela e tente conectar novamente usando a mesma senha. Você conseguiu conectar?
 
-A partir da janela do usuário system execute os comandos abaixo.
+### Tente usar a nova senha alterada no comando ALTER USER. O que aconteceu?
+
+### A partir da janela do usuário system execute os comandos abaixo
 
 ```sql
 SHOW USER;
 ```
 
-Esse comando cria a tabela xyz em qual usuário?
+### Esse comando cria a tabela xyz em qual usuário?
 
 ```sql
 CREATE TABLE xyz (name VARCHAR2(30));
 ```
 
-esse comando cria a tabela xyz em qual usuário?
-Que nível de privilégio foi necessário para que isso seja possível?
+### E esse? Cria a tabela xyz em qual usuário?
+
+### Que nível de privilégio foi necessário para que isso seja possível?
 
 ```sql
 CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));
 ```
 
-Volte na janela do usuário USR_LAB01 e rode o comando abaixo.
+### Volte na janela do usuário USR_LAB01 e rode o comando abaixo
 
-Se ele funcionar é que a tabela pertence a esse usuário
+### Se ele funcionar é que a tabela pertence a esse usuário
 
 ```sql
 DESC xyz 
 ```
 
-Esse comando funcionou? O que falta ao usuário USR_LAB01 para que esse comando funcione?
+### Esse comando funcionou? O que falta ao usuário USR_LAB01 para que esse comando funcione?
 
 ```sql
 DESC system.xyz
 ```
 
-## volte na janela do usuário SYSTEM
+## Volte na janela do usuário SYSTEM
 
 ```sql
 CREATE USER USR_LAB02 IDENTIFIED BY SENHA default tablespace users;
 ```
 
-Que operação está acontecendo aqui?
+### Que operação está acontecendo aqui?
 
 ```sql
 GRANT INSERT, DELETE, SELECT ON USR_LAB01.XYZ TO USR_LAB02;
@@ -106,7 +108,7 @@ GRANT INSERT, DELETE, SELECT ON USR_LAB01.XYZ TO USR_LAB02;
 GRANT connect to USR_lab02;
 ```
 
-Qual o significado do resultado dessa consulta?
+### Qual o significado do resultado dessa consulta?
 
 ```sql
 select * from dba_tab_privs where grantee = 'USR_LAB02';
@@ -120,19 +122,19 @@ insert into usr_lab01.xyz values ('teste de nome');
 commit;
 ```
 
-Mostre o resultado desse comando e explique por que ele funcionou.
+### Mostre o resultado desse comando e explique por que ele funcionou.
 
 ```sql
 select * from usr_lab01.xyz;
 ```
 
-Mostre o resultado desse comando e explique por que ele NÃO funcionou.
+### Mostre o resultado desse comando e explique por que ele NÃO funcionou.
 
 ```sql
 select * from system.xyz;
 ```
 
-Mostre o resultado desse comando e explique por que ele NÃO funcionou.
+### Mostre o resultado desse comando e explique por que ele NÃO funcionou.
 
 ```sql
 select * from xyz;
@@ -140,7 +142,7 @@ select * from xyz;
 
 ## Na janela do usuário usr_lab01
 
-A visão dba_sys_privs requer privilégio específico para ser acessada. O usuário usr_lab01 ainda não tem esse privilégio. rode o comando abaixo e veja se funciona?
+### A visão dba_sys_privs requer privilégio específico para ser acessada. O usuário usr_lab01 ainda não tem esse privilégio. rode o comando abaixo e veja se funciona?
 
 ```sql
 select * from dba_sys_privs;
@@ -166,7 +168,7 @@ grant new_dba to USR_LAB01;
 - Execute o comando e veja que ele funciona.
 - Explique como foi o processo de atribuição do privilégio ao usuário usr_lab01 que permitiu a ele acessa a tabela.
 
-Através das views a seguir, exibir os privilégios dos usuários e roles criados nesse lab.
+### Através das views a seguir, exibir os privilégios dos usuários e roles criados nesse lab.
 select * from dba_sys_privs;
 
 ```sql
