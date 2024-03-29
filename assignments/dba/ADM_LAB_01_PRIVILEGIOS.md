@@ -97,13 +97,14 @@ SHOW USER;
 CREATE TABLE xyz (name VARCHAR2(30));
 ```
 
-### E esse? Cria a tabela xyz em qual usuário?
 
-### Que nível de privilégio foi necessário para que isso seja possível?
+### E esse? Cria a tabela xyz em qual usuário?
 
 ```sql
 CREATE TABLE USR_LAB01.xyz (name VARCHAR2(30));
 ```
+
+### Que nível de privilégio foi necessário para que isso seja possível?
 
 ### Volte na janela do usuário USR_LAB01 e rode o comando abaixo
 
