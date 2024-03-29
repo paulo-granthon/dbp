@@ -28,6 +28,10 @@ sqplus sys as sysdba
 SELECT * FROM v$version;
 ```
 
+-- A visão `v$version` é uma visão do dicionário de dados que exibe a versão do banco de dados Oracle que está sendo utilizada.
+
+![img2](/assignments/dba/img/2_version.png)
+
 ### Explique a finalidade da visão dba_users
 
 ```sql
@@ -35,6 +39,27 @@ SELECT username FROM dba_users;
 
 CREATE USER USR_LAB01 IDENTIFIED BY SENHA default tablespace users quota unlimited on users; 
 ```
+
+-- A visão `dba_users` é uma visão do dicionário de dados que exibe informações sobre os usuários existentes no banco de dados Oracle.
+
+![img3](/assignments/dba/img/3_dba_users.png)
+
+-- O comando `CREATE USER` cria um novo usuário no banco de dados Oracle. O comando acima cria o usuário `USR_LAB01` com a senha `SENHA`, definindo o `tablespace` padrão como `users` e sem limitação de espaço.
+Durante a execução do comando, o seguinte erro foi retornado:
+
+```command
+ORA-65096: invalid common user or role name in oracle
+```
+
+Para corrigir o erro, executei o comando abaixo:
+
+```sql
+alter session set "_ORACLE_SCRIPT"=true;
+```
+
+E então executei novamente o comando `CREATE USER` para criar o usuário `USR_LAB01`.
+
+![img4](/assignments/dba/img/4_create_user.png)
 
 ### Explique pela documentação da oracle a finalidade das roles connect e resource
 
